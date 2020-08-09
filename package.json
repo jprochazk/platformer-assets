@@ -1,22 +1,22 @@
 {
-  "name": "platformer-assets",
-  "version": "1.0.0",
-  "description": "",
-  "main": "process.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jprochazk/platformer-assets.git"
-  },
-  "author": "Jan Procházka",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jprochazk/platformer-assets/issues"
-  },
-  "homepage": "https://github.com/jprochazk/platformer-assets#readme",
-  "dependencies": {
-    "canvas": "^2.6.1"
-  }
+    "name": "platformer-assets",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jprochazk/platformer-assets.git"
+    },
+    "author": "Jan Procházka",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jprochazk/platformer-assets/issues"
+    },
+    "homepage": "https://github.com/jprochazk/platformer-assets#readme",
+    "dependencies": {
+        "canvas": "^2.6.1"
+    }
 }
