@@ -1,6 +1,7 @@
 # platformer-assets
 
-Contains all the game assets for a 2D online platformer.
+Contains all the game assets for a 2D online platformer, and
+the Node CLI script for converting them.
 
 The aseprite-json format is not really friendly
 for easy loading into games, nor is it
