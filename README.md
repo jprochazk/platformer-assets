@@ -56,19 +56,5 @@ sprites: {
 }
 ```
 
-In this format, it's trivial to go through each sprite,
-turn them into actual Sprites in the game, then take each
-Animation, together with its frames, and append those to
-the Sprites. It'll result in objects looking something like this:
-
-Sprite {
-    name = someLayer
-    animations = {
-        someAnimation: [
-            {
-                "uv": { /* ... */ },
-                "delay": 100
-            }
-        ]
-    }
-}
+This format is compact and trivial to load, so it fits my needs
+perfectly.
