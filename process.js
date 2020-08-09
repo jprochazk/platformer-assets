@@ -13,8 +13,8 @@ Options:
     help: Display this message
 
 Examples: 
-    process -f ./otherSprites/test.json -d ./sprites -o ./output
-    process -d ./sprites -o ./output
+    process -f otherSprites/test.json -d sprites -o output
+    process -d sprites -o output
     `);
     process.exit(0);
 };
