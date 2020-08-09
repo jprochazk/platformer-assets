@@ -57,5 +57,4 @@ sprites: {
 }
 ```
 
-This format is compact and trivial to load, so it fits my needs
-perfectly.
+Which, in my case, is compact, and easy to load.
