@@ -54,7 +54,12 @@ async function processJSON(json, dir) {
                 const frame = json.frames[frameName];
                 if (!frame) continue nextAnimation;
                 frames.push({
-                    uv: frame.frame,
+                    uv: {
+                        x: frame.frame.x / json.meta.size.w,
+                        y: frame.frame.y / json.meta.size.h,
+                        w: frame.frame.w / json.meta.size.w,
+                        h: frame.frame.h / json.meta.size.h,
+                    },
                     delay: frame.duration,
                 });
             }
