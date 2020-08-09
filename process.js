@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const util = require("util");
 const { createCanvas, loadImage } = require("canvas");
 
 const usage = () => {
@@ -41,10 +42,7 @@ async function loadImageAsBase64(file) {
     return canvas.toDataURL();
 }
 
-async function processFile(file, output) {
-    const json = JSON.parse(fs.readFileSync(file, { encoding: "ascii" }));
-    console.log(json.length);
-
+async function processJSON(json, dir) {
     const sprites = {};
     for (const layer of json.meta.layers) {
         sprites[layer.name] = {};
@@ -67,10 +65,9 @@ async function processFile(file, output) {
             };
         }
     }
-    let spritesheet = await loadImageAsBase64(
-        `${path.dirname(file)}\\${json.meta.image}`
-    );
-    const transformed = {
+    let spritesheet = await loadImageAsBase64(`${dir}\\${json.meta.image}`);
+
+    return {
         sprites,
         spritesheet,
         meta: {
@@ -79,11 +76,6 @@ async function processFile(file, output) {
             version: json.meta.version,
         },
     };
-
-    fs.writeFileSync(
-        `${path.join(output, path.basename(file, path.extname(file)))}.json`,
-        JSON.stringify(transformed)
-    );
 }
 
 function getJsonFiles(dir, files_) {
@@ -101,11 +93,7 @@ function getJsonFiles(dir, files_) {
     return files_;
 }
 
-async function main(args) {
-    if (!(args.length > 0)) {
-        usage();
-    }
-
+function parseArgs(args) {
     let fileSet = new Set();
     let output = null;
 
@@ -144,6 +132,7 @@ async function main(args) {
     }
 
     const files = [...fileSet.values()];
+
     if (!(files.length > 0)) {
         fatal(`No files provided`);
     }
@@ -161,8 +150,31 @@ async function main(args) {
         fatal(`Output destination "${output}" is not a directory`);
     }
 
+    return { files, output };
+}
+
+async function main(args) {
+    if (!(args.length > 0)) {
+        usage();
+    }
+
+    const { files, output } = parseArgs(args);
+
     for (const file of files) {
-        await processFile(file, output);
+        try {
+            console.log(`Processing file ${file}...`);
+            console.log(`Reading ${file}...`);
+            const json = JSON.parse(
+                fs.readFileSync(file, { encoding: "ascii" })
+            );
+            const processed = await processJSON(json, path.dirname(file));
+            const out = path.join(output, path.basename(file));
+            console.log(`Writing to file ${out}`);
+            fs.writeFileSync(out, JSON.stringify(processed));
+        } catch (err) {
+            //fatal(err.message);
+            throw err;
+        }
     }
 }
 main(process.argv.slice(2));
