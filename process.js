@@ -172,8 +172,7 @@ async function main(args) {
             console.log(`Writing to file ${out}`);
             fs.writeFileSync(out, JSON.stringify(processed));
         } catch (err) {
-            //fatal(err.message);
-            throw err;
+            fatal(err.message);
         }
     }
 }
